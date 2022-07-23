@@ -45,6 +45,26 @@ aimbot.GetClosestPart = function()
         end
     end
     
+       if Obscuring == false and ((Closest[1] ~= nil and DistanceFromCenter < Closest[1]) or Closest[1] == nil) then
+       if Closest[1] == nil or (DistanceFromCenter < Closest[1]) then
+       local Prediction = Vector3.new(0, 0, 0)
+       if MovementPrediction == true then
+       Prediction = PlayerRoot.Velocity * (MovementPredictionStrength / 10) * (Client.Character.Head.Position - PlayerHead.Position).magnitude / 100
+    end
+       Closest[1] = DistanceFromCenter
+       local PlayerAim = nil
+       if AimPart == "Torso" then
+       PlayerAim = v.Character:FindFirstChild("HumanoidRootPart") or v.Character:FindFirstChild("Torso")
+       else
+       PlayerAim = v.Character.Head
+    end
+       Closest[2] = PlayerAim
+       Closest[3] = Vector2.new(PlayerScreen.X, PlayerScreen.Y)
+       Closest[4] = Prediction
+       Closest[5] = v
+    end
+end)
+
     if aimbot.Players == true then
         for i,v in pairs(Players:GetPlayers()) do
             if not table.find(aimbot.FriendlyPlayers, v.Name) and v.Name ~= plr.Name then
@@ -137,27 +157,6 @@ RunService.RenderStepped:Connect(function() -- Aiming
         if part then
             aimbot.Aim(part.Position.X, part.Position.Y, aimbot.Smoothing)
         end
-    end
-end)
-
-                if Obscuring == false and ((Closest[1] ~= nil and DistanceFromCenter < Closest[1]) or Closest[1] == nil) then
-                if Closest[1] == nil or (DistanceFromCenter < Closest[1]) then
-                local Prediction = Vector3.new(0, 0, 0)
-                if MovementPrediction == true then
-                Prediction = PlayerRoot.Velocity * (MovementPredictionStrength / 10) * (Client.Character.Head.Position - PlayerHead.Position).magnitude / 100
-             end
-                Closest[1] = DistanceFromCenter
-                local PlayerAim = nil
-                if AimPart == "Torso" then
-                PlayerAim = v.Character:FindFirstChild("HumanoidRootPart") or v.Character:FindFirstChild("Torso")
-                else
-                PlayerAim = v.Character.Head
-             end
-          Closest[2] = PlayerAim
-          Closest[3] = Vector2.new(PlayerScreen.X, PlayerScreen.Y)
-          Closest[4] = Prediction
-          Closest[5] = v
-       end
     end
 end)
 
