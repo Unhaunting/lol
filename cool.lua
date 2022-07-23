@@ -44,7 +44,7 @@ aimbot.GetClosestPart = function()
             table.insert(parts, v)
         end
     end
-    
+    aimbot.Predicton == true then
        if Obscuring == false and ((Closest[1] ~= nil and DistanceFromCenter < Closest[1]) or Closest[1] == nil) then
        if Closest[1] == nil or (DistanceFromCenter < Closest[1]) then
        local Prediction = Vector3.new(0, 0, 0)
