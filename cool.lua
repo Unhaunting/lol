@@ -159,10 +159,5 @@ if Obscuring == false and ((Closest[1] ~= nil and DistanceFromCenter < Closest[1
                                         Closest[5] = v
                                     end
                                 end
-                            end
-                        end
-                    end
-                end
-            end)
-        end
+                            end)
 return aimbot
